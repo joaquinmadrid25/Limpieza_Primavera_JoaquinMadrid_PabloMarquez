@@ -1,6 +1,9 @@
 Alumnos:Joaquin Madrid y Pablo Marquez
+
 Nombre actividad:AEE-Refactorizacion-de-Codigo-Legacy
+
 Ciclo:Desarrollo de Aplicaciones Web
+
 Fecha:18/05/2026
 
 # Fase 1: Analisis de la Deuda Técnica
