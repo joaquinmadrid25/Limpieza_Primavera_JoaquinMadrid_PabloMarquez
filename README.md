@@ -1,17 +1,17 @@
 **Alumnos**:Joaquin Madrid y Pablo Márquez
 
-**Nombre actividad**:AEE-Refactorizacion-de-Codigo-Legacy
+**Nombre actividad**: AEE-Refactorizacion-de-Codigo-Legacy
 
-**Ciclo**:Desarrollo de Aplicaciones Web
+**Ciclo**: Desarrollo de Aplicaciones Web
 
-**Fecha**:18/05/2026
+**Fecha**: 18/05/2026
 
 # Fase 1: Analisis de la Deuda Técnica
 
-1. Verificación inicial:Ejecuta los tests unitarios. Todo debe salir en verde. 
+1. **Verificación inicial**: Ejecuta los tests unitarios. Todo debe salir en verde. 
 Esto os garantiza que el código original, por muy feo que sea, funciona.
 
-2. Oler el código (Code Smells). El Copiloto anotará en un bloc de notas los tres grandes 
+2. **Oler el código (Code Smells)**: El Copiloto anotará en un bloc de notas los tres grandes 
 problemas de este código:
 
 - Números mágicos. ¿Qué significa 0.25 o 0.15? Son valores hardcodeados sin contexto. 
@@ -27,42 +27,10 @@ Si mañana cambia una regla de negocio, habría que buscar manualmente todos los
 - tC: tipoCliente
 - dV: esSocioVip
 
-- Código Spaghetti. La anidación de múltiples if-else crea una estructura en forma de flecha > 
+- **Código Spaghetti**. La anidación de múltiples if-else crea una estructura en forma de flecha > 
 que hace casi imposible seguir el flujo lógico de ejecución.
+El código espagueti es un claro ejemplo de "mal olor en el código," un término que identifica áreas problemáticas. Con la formula **M = C + 1**  se puede saber de manera objetiva si el código es fácil de mantener. En este caso, las estructuras de los if pueden resultar un poco liosas ya que sin comentar nada ves todo junto y de golpe.
 
-public class FacturacionLegacy {
-
-    // Método optimizado
-    public double obtenerImporteFinal(double subtotal, int categoriaCliente, boolean clientePremium) {
-
-        // Constantes
-        final double IMPUESTO_REDUCIDO = 0.25;
-        final double DESCUENTO_GENERAL = 0.15;
-        final double DESCUENTO_PREMIUM = 0.05;
-
-        // Validación inicial
-        if (subtotal <= 0) {
-            return 0;
-        }
-        double porcentajeAplicado = 0;
-
-        // Selección de descuento según tipo de cliente
-        switch (categoriaCliente) {
-            case 1:
-                porcentajeAplicado = clientePremium
-                        ? IMPUESTO_REDUCIDO
-                        : DESCUENTO_GENERAL;
-                break;
-            case 2:
-                porcentajeAplicado = DESCUENTO_PREMIUM;
-                break;
-            default:
-                porcentajeAplicado = 0;
-        }
-        // Resultado final
-        return subtotal - (subtotal * porcentajeAplicado);
-    }
-}
 # Fase 2: Refactorización Asistida por el IDE (Quirófano abierto)
 
 1. Renombrado Seguro. Utiliza exclusivamente las herramientas automáticas del IDE para cambiar los nombres de las variables en todo el documento a la vez, sin riesgo de errores tipográficos.
