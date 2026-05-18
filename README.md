@@ -40,6 +40,34 @@ El código espagueti es un claro ejemplo de "mal olor en el código," un términ
 
 3. Cláusulas de Guarda (Guard Clauses). Modifica la estructura de control para "aplanar" el código. Invierte las condiciones lógicas y utiliza retornos tempranos (return) para eliminar todos los bloques “else”.
 - Ejemplo conceptual: En lugar de if (importe > 0) { ... } else { return 0; }, cambiadlo a if (importe <= 0) return 0; en la primera línea.
+public class FacturacionLegacy {
+
+
+    // Método a refactorizar
+    public double calcularTotal(double importeBase, int tipoCliente, boolean esSocioVip) {
+    //Entorno:
+        private static final double DESCUENTO_VIP = 0.25;
+        private static final double DESCUENTO_ESTANDAR = 0.15;
+        private static final double DESCUENTO_REGALO = 0.05;
+    //Algoritmo:
+        if (importeBase > 0) {
+            if (tipoCliente == 1) {
+                if (esSocioVip == true)
+                    return importeBase - (importeBase * DESCUENTO_VIP);
+                else
+                    return importeBase - (importeBase * DESCUENTO_ESTANDAR);
+            } else {
+                if (tipoCliente == 2) {
+                    return importeBase - (importeBase * DESCUENTO_REGALO);
+                } else {
+                    return importeBase;
+                }//Fin Si
+            }
+        } else {
+            return 0;
+        }//Fin Si
+    }//Fin Función
+}
 
 # Fase 3: Verificación, Documentación y Entrega
 1. Validación constante. Vuelve a ejecutar los tests unitarios tras CADA pequeño cambio. ¡Deben seguir en verde! Si alguno falla, significa que habéis roto el negocio. Usad el control de versiones (Git) para deshacer los cambios y volver a un estado seguro.
