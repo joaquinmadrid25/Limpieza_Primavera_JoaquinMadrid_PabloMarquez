@@ -65,6 +65,7 @@ public class FacturacionLegacy {
                     return importeBase;
                 }//Fin Si
             }
+
         } else {
             return 0;
         }//Fin Si
