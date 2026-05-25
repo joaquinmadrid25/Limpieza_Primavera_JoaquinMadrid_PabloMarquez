@@ -68,3 +68,6 @@ Para hacer que el código sea lo más simple y legible posible, hemos añadido d
 
 Finalmente, hemos ejecutado este commit para dar como finalizada la actividad, haciendo una breve descripción de lo realizado.
 **git commit -m** "refactor: reducción de complejidad ciclomática mediante cláusulas de guarda y nombrado semántico"
+
+<img width="1358" height="311" alt="image" src="https://github.com/user-attachments/assets/1f634b61-d70d-477a-92d1-e7b5630a9923" />
+
