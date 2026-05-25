@@ -45,11 +45,13 @@ public class FacturacionLegacy {
 
     // Método a refactorizar
     public double calcularTotal(double importeBase, int tipoCliente, boolean esSocioVip) {
-    //Entorno:
+
+  //Entorno:
         private static final double DESCUENTO_VIP = 0.25;
         private static final double DESCUENTO_ESTANDAR = 0.15;
         private static final double DESCUENTO_REGALO = 0.05;
-    //Algoritmo:
+
+  //Algoritmo:
         if (importeBase > 0) {
             if (tipoCliente == 1) {
                 if (esSocioVip == true)
