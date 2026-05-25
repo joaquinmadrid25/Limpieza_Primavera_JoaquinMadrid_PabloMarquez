@@ -88,7 +88,67 @@ public class FacturacionLegacy {
 # Fase 3: Verificación, Documentación y Entrega
 1. Validación constante. Vuelve a ejecutar los tests unitarios tras CADA pequeño cambio. ¡Deben seguir en verde! Si alguno falla, significa que habéis roto el negocio. Usad el control de versiones (Git) para deshacer los cambios y volver a un estado seguro.
 
-2. Documentación profesional. Genera la documentación JavaDoc escribiendo / y pulsando Enter justo encima del método. Rellena los campos @param explicando qué recibe la función y el @return detallando qué devuelve.
+Al aplicar las clausulas de guarda, hemos invertido el contol y eliminado el "efecto piramide"(la indentacion profunda). EL flujo logico original se mantiene intacto, pero ahora es lineal.
+
+**Casos criticos a verificar en verde**:
+- importeBase negativo o cero $\rightarrow$ Debe retornar 0.0.
+- tipoCliente == 1 y esSocioVip == true $\rightarrow$ Debe aplicar 0.25.
+- tipoCliente == 1 y esSocioVip == false $\rightarrow$ Debe aplicar 0.15.
+- tipoCliente == 2 $\rightarrow$ Debe aplicar 0.05.
+- Cualquier otro caso $\rightarrow$ Debe retornar el importeBase sin cambios.
+
+2. Documentación Profesional (JavaDoc)
+
+Colocamos la documentación estructurada justo encima de la clase y del método refactorizado. Nota cómo las constantes quedan limpiamente declaradas a nivel de clase (fuera del método, corrigiendo el error de anidamiento del código legacy).
+
+    /**
+    * Clase encargada de gestionar las reglas de negocio para la facturación
+    * y cálculo de importes de la aplicación.
+    */
+    public class FacturacionLegacy {
+
+    private static final double DESCUENTO_VIP = 0.25;
+    private static final double DESCUENTO_ESTANDAR = 0.15;
+    private static final double DESCUENTO_REGALO = 0.05;
+
+    /**
+     * Calcula el importe total facturado aplicando los descuentos correspondientes 
+     * según el tipo de cliente y su estado de suscripción VIP.
+     * * @param importeBase   El monto bruto de la factura (debe ser mayor que 0).
+     * @param tipoCliente   El código identificador del tipo de cliente (1 para habitual, 2 para especial).
+     * @param esSocioVip    Indicador de si el cliente cuenta con membresía VIP activa.
+     * @return El importe total neto tras aplicar los descuentos, o 0 si el importe base no es válido.
+     */
+   
+           public double calcularTotal(double importeBase, int tipoCliente, boolean esSocioVip) {
+        
+           // Cláusula de guarda: Validación de entrada
+
+            if (importeBase <= 0) {
+              return 0;
+           }
+
+           // Cláusula de guarda: Cliente Tipo 1
+
+           if (tipoCliente == 1) {
+            if (esSocioVip) {
+                return importeBase - (importeBase * DESCUENTO_VIP);
+            }
+            return importeBase - (importeBase * DESCUENTO_ESTANDAR);
+
+           }
+
+           // Cláusula de guarda: Cliente Tipo 2
+
+           if (tipoCliente == 2) {
+            return importeBase - (importeBase * DESCUENTO_REGALO);
+
+           }
+
+           // Caso por defecto (Sin descuentos)
+           return importeBase;
+           }
+           }
 
 3. Guardado en el repositorio: Realiza un commit semántico en vuestro repositorio que describa exactamente lo que habéis hecho.
 - Ejemplo: git commit -m "refactor: reducción de complejidad ciclomática mediante cláusulas de guarda y nombrado semántico"
