@@ -27,9 +27,19 @@ Si mañana cambia una regla de negocio, habría que buscar manualmente todos los
 - tC: tipoCliente
 - dV: esSocioVip
 
-- **Código Spaghetti**. La anidación de múltiples if-else crea una estructura en forma de flecha > 
-que hace casi imposible seguir el flujo lógico de ejecución.
-El código espagueti es un claro ejemplo de "mal olor en el código," un término que identifica áreas problemáticas. Con la formula **M = C + 1**  se puede saber de manera objetiva si el código es fácil de mantener. En este caso, las estructuras de los if pueden resultar un poco liosas ya que sin comentar nada ves todo junto y de golpe.
+**Código Spaghetti**:
+Es un termino peyorativo para programas que tienen una estructura de control de flujo compleja, caso como un plato de fideos entrelazados:
+- **Sin principio ni fin claro**: El flujo salta de un lado a otro.
+
+- **Dependencias ocultas**: Tocar una parte del sistema rompe algo en un lugar totalmente inesperado.
+
+- **Falta de jerarquía**: Todo parece estar al mismo nivel de importancia, lo que confunde al lector.
+
+|Aspecto|Codigo Spaghetti|Codigo Limpio|
+|:-------|:--------------|:------------|
+|Flujo|Como un laberinto|Como una lista de tareas|
+|Validacion|"Si todo esto es cierto, hazlo|"Si algo falla, delante"|
+|Atencion|Tiene que leer todo para entender una parte|Puedes leer solo la parte que te interesa|
 
 # Fase 2: Refactorización Asistida por el IDE (Quirófano abierto)
 
