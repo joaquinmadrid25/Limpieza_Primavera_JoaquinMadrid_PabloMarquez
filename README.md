@@ -7,25 +7,19 @@
 **Fecha**: 18/05/2026
 
 # Fase 1: Analisis de la Deuda Técnica
+Antes de empezar a refactorizar el código, es necesario realizar un análisis previo. En primer lugar, hay que validar que el código que tenemos actualmente funciona, aunque por dentro no esté bien estructurado. Al hacer los test unitarios, hemos verificado que funciona correctamente. 
 
-1. **Verificación inicial**: Ejecuta los tests unitarios. Todo debe salir en verde. 
-Esto os garantiza que el código original, por muy feo que sea, funciona.
+Si nos adentramos en los valores del código, en concreto 0.25 y 0.15, son literales numéricos que si mañana cambia una regla de negocio, habría que buscar manualmente todos los lugares donde aparecen esos valores para modificarlos, aumentando el riesgo de errores y dificultando el mantenimiento del código. Por ello, hemos decidido declararlos como constantes cuando vayamos a refactorizar el código, para que cuando haya que modificarlo, con cambiar el valor de la constante es suficiente.
 
-2. **Oler el código (Code Smells)**: El Copiloto anotará en un bloc de notas los tres grandes 
-problemas de este código:
+En cuanto a las variables, el nombre que tenían anteriormente se podía interpretar de muchísimas formas, por lo que no era una buena práctica. Hemos pensado cambiarlos para que así sea más eficiente y legible.
 
-- Números mágicos. ¿Qué significa 0.25 o 0.15? Son valores hardcodeados sin contexto. 
-Si mañana el IVA o el descuento cambian, ¿dónde los buscamos?
-
-Para el IVA los valores como 0.25 o 0.15 aparecen hardcodeados sin ningún contexto que 
-explique su significado. ¿Qué representan exactamente? ¿IVA, comisión o descuento? 
-Si mañana cambia una regla de negocio, habría que buscar manualmente todos los lugares donde aparecen esos valores para modificarlos, aumentando el riesgo de errores y dificultando el mantenimiento del código. 
-
-- Variables sin significado. Nombres como cT, m, tC o dV no aportan ninguna semántica. Nos obligan a adivinar.
-- cT: calculoTotal
-- m: importeBase
-- tC: tipoCliente
-- dV: esSocioVip
+| ANTIGUA | ACTUAL |
+| :---: | :---: |
+| cT | calculoTotal |
+| m | importeBase |
+| tC | tipoCliente |
+| dV | esSocioVip |
+  
 
 **Código Spaghetti**:
 Es un termino peyorativo para programas que tienen una estructura de control de flujo compleja, caso como un plato de fideos entrelazados:
@@ -41,6 +35,7 @@ Es un termino peyorativo para programas que tienen una estructura de control de 
 |Validacion|"Si todo esto es cierto, hazlo|"Si algo falla, delante"|
 |Atencion|Tiene que leer todo para entender una parte|Puedes leer solo la parte que te interesa|
 
+   
 # Fase 2: Refactorización Asistida por el IDE (Quirófano abierto)
 
 1. Renombrado Seguro. Utiliza exclusivamente las herramientas automáticas del IDE para cambiar los nombres de las variables en todo el documento a la vez, sin riesgo de errores tipográficos.
